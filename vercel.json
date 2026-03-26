@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/:code.mp4",
+      "destination": "https://cdn2.videy.co/:code.mp4"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
