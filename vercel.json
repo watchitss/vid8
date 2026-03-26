@@ -5,7 +5,7 @@
       "destination": "https://cdn2.videy.co/:code.mp4"
     },
     {
-      "source": "/(.*)",
+      "source": "//index.html",
       "destination": "/index.html"
     }
   ]
