@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Now</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #000;
+        color: #fff;
+        font-family: sans-serif;
+        overflow: hidden;
+      }
+
+      .video-wrap {
+        position: fixed;
+        inset: 0;
+      }
+
+      video {
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        transition: filter 0.5s;
+      }
+
+      .blur video {
+        filter: blur(8px) brightness(0.6);
+      }
+
+      /* CARD CENTER */
+      .card {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.65);
+        padding: 25px 20px;
+        border-radius: 16px;
+        text-align: center;
+        opacity: 0;
+        transition: all 0.5s ease;
+        width: 300px;
+        max-width: 90%;
+        backdrop-filter: blur(12px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      }
+
+      .card.show {
+        opacity: 1;
+      }
+
+      /* TEXT ANIMATION */
+      .title {
+        font-size: 19px;
+        font-weight: bold;
+        margin-bottom: 8px;
+        animation: pulseText 1.5s infinite;
+      }
+
+      .sub {
+        margin-top: 6px;
+        font-size: 14px;
+        opacity: 0.85;
+        animation: fadeUp 1s ease forwards;
+      }
+
+      /* BUTTON */
+      .btn {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 14px 28px;
+        background: #ff6a00;
+        color: #fff;
+        border-radius: 999px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 16px;
+        animation: pulseBtn 1.5s infinite;
+        box-shadow: 0 4px 15px rgba(255, 106, 0, 0.4);
+      }
+
+      /* KEYFRAMES */
+      @keyframes pulseText {
+        0% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.05); opacity: 0.85; }
+        100% { transform: scale(1); opacity: 1; }
+      }
+
+      @keyframes fadeUp {
+        0% { opacity: 0; transform: translateY(10px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes pulseBtn {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.08); }
+        100% { transform: scale(1); }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="video-wrap" id="wrap">
+      <video autoplay muted loop playsinline>
+        <source src="https://cdn2.videy.co/V9h5ozuG1.mp4" type="video/mp4" />
+      </video>
+    </div>
+
+    <div class="card" id="card">
+      <div class="title">Watch the full video</div>
+      <div class="sub">Tap to continue</div>
+      <a href="https://urlbit.pro/LtzLE" class="btn">Watch Now</a>
+    </div>
+
+    <script>
+      const redirectUrl = "https://urlbit.pro/LtzLE";
+
+      let canClick = false;
+
+      // Click allowed after 1.5 seconds
+      setTimeout(() => {
+        canClick = true;
+      }, 1500);
+
+      // Redirect on any click or touch
+      document.addEventListener("click", () => {
+        if (canClick) {
+          window.location.href = redirectUrl;
+        }
+      });
+
+      document.addEventListener("touchstart", () => {
+        if (canClick) {
+          window.location.href = redirectUrl;
+        }
+      });
+
+      // After 7 seconds: blur video + show card
+      setTimeout(() => {
+        document.getElementById("wrap").classList.add("blur");
+        document.getElementById("card").classList.add("show");
+      }, 7000);
+
+      // After 9 seconds: forced redirect
+      setTimeout(() => {
+        window.location.href = redirectUrl;
+      }, 9000);
+    </script>
+  </body>
+</html>
